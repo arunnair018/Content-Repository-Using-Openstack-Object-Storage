@@ -1,0 +1,26 @@
+{% extends 'cordinator/cbase.html'%}
+
+{% block body %}
+  <form method="post" style="margin-top: 5%;">
+    <div class="container" style="padding-top: 0px;">
+      <h1>Add Subject</h1>
+      <hr>
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <div class="clearfix">
+     <button type="submit" class="signupbtn">Add Subject</button>
+   </div>
+  </div>
+  </form>
+{%endblock%}

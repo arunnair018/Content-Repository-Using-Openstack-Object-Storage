@@ -1,0 +1,132 @@
+{% extends 'videos/base.html'%}
+{% block active %}
+<style>
+  video {
+      width: 100%;
+      height: auto;
+      padding: 1%;
+  }
+  @media only screen and (min-width: 600px) {
+      .col-s-1 {width: 8.33%;}
+      .col-s-2 {width: 16.66%;}
+      .col-s-3 {width: 25%;}
+      .col-s-4 {width: 33.33%;}
+      .col-s-5 {width: 41.66%;}
+      .col-s-6 {width: 50%;}
+      .col-s-7 {width: 58.33%;}
+      .col-s-8 {width: 66.66%;}
+      .col-s-9 {width: 75%;}
+      .col-s-10 {width: 83.33%;}
+      .col-s-11 {width: 91.66%;}
+      .col-s-12 {width: 100%;}
+  }
+  @media only screen and (min-width: 768px) {
+      .col-1 {width: 8.33%;}
+      .col-2 {width: 16.66%;}
+      .col-3 {width: 25%;}
+      .col-4 {width: 33.33%;}
+      .col-5 {width: 41.66%;}
+      .col-6 {width: 50%;}
+      .col-7 {width: 58.33%;}
+      .col-8 {width: 66.66%;}
+      .col-9 {width: 75%;}
+      .col-10 {width: 83.33%;}
+      .col-11 {width: 91.66%;}
+      .col-12 {width: 100%;}
+  }
+  .player{
+    width: 100%;
+    background-color: black;
+  }
+  .f1{
+    position: relative;
+    left:50px;
+  }
+  #d1{
+    margin-left: 20%;
+    margin-top: 2%;
+  }
+  .comment{
+    margin-left: 26%;
+    margin-top: 2%;
+  }
+  .checkbox-inline{
+    margin-left: 30%;
+    margin-top: 2%;
+  }
+  .bg-success{
+    margin-left: 26%;
+    margin-top: 2%;
+    width: 49%;
+    padding: 1%;
+  }
+</style>
+{% endblock %}
+{% block add%}
+<li class=""><a href="{% url 'videos:gen' %}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>&nbsp;Report</a></li>
+<li class=""><a href="{% url 'videos:facrated' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Rated</a></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>{{username}}</b><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="{% url 'videos:logout' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a></li>
+    </ul>
+</li>
+{% endblock %}
+{% block body %}
+{% if video %}
+{% for x in video %}
+<div class="player">
+<center>
+<div class="col-6 col-s-9">
+  <video width="500" controls >
+    <source src="{{x.file_file.url}}" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+</center>
+</div>
+<form action="{% url 'videos:rate' video=x.file_file%}" method="get" >
+  {% csrf_token %}
+  <div class="container">
+ <div class="row">
+   <div class="col-sm-6">
+     <label style="font-size:20px; float:left;" class="checkbox-inline"><b>Re-do: </b></label> <input name="redo" type="hidden" value="False"><input name="redo" type="checkbox" value="True">
+   </div>
+   <div class="col-sm-6">
+     <div class="dropdown" id="d1">
+       <label style="font-size:20px;">Rate: </label>
+       <select class="btn btn-primary dropdown-toggle" name="rate">
+        <option selected value="0"> -- select an option -- </option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+     </div>
+   </div>
+ </div>
+</div>
+<div class="col-sm-12">
+  <div class="comment">
+  <div>
+  <textarea class="form-control" name="comment" rows="2" id="comment" placeholder="Comment..." style="width:66%"></textarea>
+  </div><br>
+  <button type="submit" class="btn">Submit</button>
+  </form>
+  </div>
+</div>
+
+</div>
+{% if x.comment %}
+  <p class="bg-success">{{x.comment}}</p>
+{%endif%}
+
+{% endfor %}
+{%endif%}
+{%endblock%}

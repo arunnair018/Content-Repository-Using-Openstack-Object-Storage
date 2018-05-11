@@ -1,0 +1,25 @@
+{% extends 'cordinator/cbase.html'%}
+
+{% block body %}
+<div class="container" style="width: 90%;">
+<h2>Subjects</h2>
+	{%if sub%}
+		<table class="table">
+		    <thead>
+		      <tr>
+		        <th>Name</th>
+		      </tr>
+		    </thead>
+		    {%for y in sub%}
+		    <tbody>
+		      <tr>
+		        <td>{{y.name}}</td>
+		        <td><a href="{% url 'videos:sdel'%}?z={{y.name}}"><button type="button" class="btn btn-outline-primary" onclick="return confirm('Are you sure you want to delete this item?');" style=" float:right; background: skyblue;width: 40%;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Remove</button></a>
+				</td>
+		      </tr>
+		    </tbody>	
+		    {%endfor%}
+		  </table>
+	{%endif%}
+</div>
+{%endblock%}

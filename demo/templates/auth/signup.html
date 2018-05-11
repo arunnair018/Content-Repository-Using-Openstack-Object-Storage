@@ -1,0 +1,39 @@
+{% extends 'cordinator/cbase.html'%}
+
+{% block active %}
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="{% url 'videos:register' %}">Add User</a></li>
+      <li class=""><a href="{% url 'videos:udel' %}">Delete User</a></li>
+    </ul>
+</li>
+{% endblock %}
+
+{% block body %}
+  <form method="post" style="margin-top: 5%;">
+    <div class="container" style="padding-top: 0px;">
+      <h1>Add User</h1>
+      <hr>
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <div class="clearfix">
+     <button type="submit" class="signupbtn">Add User</button>
+   </div>
+  </div>
+  </form>
+  {%if p%}
+  <center><p style="color: red"><b>{{p}}</b></p></center>
+  {%endif%}
+{%endblock%}

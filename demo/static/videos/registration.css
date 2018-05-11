@@ -1,0 +1,65 @@
+
+body{
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-size: 160%;
+}
+
+input[type=email]{
+  box-shadow: none;
+}
+
+  input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 15px;
+  display: inline-block;
+  border: none;
+  background: #f0f0f0;
+}
+
+input[type=text]:focus, input[type=password]:focus,  input[type=email]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+.cancelbtn, .signupbtn {
+  float: left;
+  width: 100%;
+  font-weight: bold;
+  font-size: 100%
+}
+
+.container {
+  padding-left: 20%;
+  padding-right: 20%;
+  color: black;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+@media screen and (max-width: 300px) {
+  .signupbtn {
+    width: 100%;
+  }
+}

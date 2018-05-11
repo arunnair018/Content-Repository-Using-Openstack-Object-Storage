@@ -1,0 +1,89 @@
+{% extends 'videos/base.html'%}
+{% block active %}
+<li class=""><a href="{% url 'videos:studentsview' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Your Uploads</a></li>
+<li class=""><a href="{% url 'videos:facrated' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Rated</a></li>
+<style>
+  video {
+      width: 100%;
+      height: auto;
+      padding: 1%;
+  }
+  @media only screen and (min-width: 600px) {
+      .col-s-1 {width: 8.33%;}
+      .col-s-2 {width: 16.66%;}
+      .col-s-3 {width: 25%;}
+      .col-s-4 {width: 33.33%;}
+      .col-s-5 {width: 41.66%;}
+      .col-s-6 {width: 50%;}
+      .col-s-7 {width: 58.33%;}
+      .col-s-8 {width: 66.66%;}
+      .col-s-9 {width: 75%;}
+      .col-s-10 {width: 83.33%;}
+      .col-s-11 {width: 91.66%;}
+      .col-s-12 {width: 100%;}
+  }
+  @media only screen and (min-width: 768px) {
+      .col-1 {width: 8.33%;}
+      .col-2 {width: 16.66%;}
+      .col-3 {width: 25%;}
+      .col-4 {width: 33.33%;}
+      .col-5 {width: 41.66%;}
+      .col-6 {width: 50%;}
+      .col-7 {width: 58.33%;}
+      .col-8 {width: 66.66%;}
+      .col-9 {width: 75%;}
+      .col-10 {width: 83.33%;}
+      .col-11 {width: 91.66%;}
+      .col-12 {width: 100%;}
+  }
+  .player{
+    width: 100%;
+    background-color: black;
+  }
+  .f1{
+    position: relative;
+    left:50px;
+  }
+  .bg-success{
+    margin-left: 26%;
+    margin-top: 2%;
+    width: 49%;
+    padding: 1%;
+  }
+  .bg-primary{
+    margin-left: 26%;
+    margin-top: 2%;
+    width: 5%;
+    padding: .5%;
+  }
+</style>
+{% endblock %}
+{%block add%}
+<li class=""><a href="{% url 'videos:add' %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Video</a></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>{{username}}</b><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="{% url 'videos:logout' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a></li>
+    </ul>
+</li>
+{%endblock%}
+{% block body %}
+{% if video %}
+{% for x in video %}
+<div class="player">
+<center>
+<div class="col-6 col-s-9">
+  <video width="500" controls >
+    <source src="{{x.file_file.url}}" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+</div>
+</center>
+</div>
+<b><p class="bg-primary">Rating: {{x.rating}}</p></b>
+{% if x.comment %}
+  <p class="bg-success">{{x.comment}}</p>
+{%endif%}
+{% endfor %}
+{%endif%}
+{%endblock%}

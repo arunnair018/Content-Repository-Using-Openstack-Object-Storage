@@ -1,0 +1,59 @@
+{% extends 'videos/base.html'%}
+{% block active %}
+<li class=""><a href="{% url 'videos:studentsview' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Your Uploads</a></li>
+<li class="active"><a href="{% url 'videos:facrated' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Rated</a></li>
+<style>
+  .list-group-item{
+    display: inline-block;
+    padding: 1%;
+    margin: 1%;
+  }
+  video{
+    height: 200px;
+    width: 300px;
+    border: none;
+  }
+  .container{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 95%;
+  }
+</style>
+{% endblock %}
+{%block add%}
+<li class=""><a href="{% url 'videos:add' %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Video</a></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>{{username}}</b><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="{% url 'videos:logout' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a></li>
+    </ul>
+</li>
+{%endblock%}
+{% block body %}
+{%if p%}
+<center><h1 style="padding:15%;">{{p}}</h1></center>
+{%endif%}
+{% if x %}
+<div class="container">
+<ul class="list-group">
+  {% for y in x %}
+  {% if y.rating > 0 and y.redo == False %}
+ <li class="list-group-item">
+   <a href="{%url 'videos:player' y.file_file%}">
+   <video width="320" height="240" preload="metadata">
+   <source src="{{y.file_file.url}}">
+   </video></a>
+   <p><b><h4>{{y.video_title}}</h4></b></p>
+   <span style="display: block;margin-right:10%;float:right; font-size:300%;" class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+   <!-- <a href="delete/{{y.file_file}}"><button type="button" class="btn btn-outline-primary" style="display: block;margin-right:2%; float:right; background: skyblue;"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;Remove</button></a> -->
+   <p><h5>Subject: {{y.subject}}</h5></p>
+   <p><h5>Faculty: {{y.faculty}}</h5></p>
+   <p><h5>Rating: {{y.rating}}</h5></p>
+   <p><h5>Uploaded on : {{y.time}}</h5></p>
+ </li>
+ {%endif%}
+ {% endfor %}
+</ul>
+</div>
+{% endif %}
+{% endblock %}

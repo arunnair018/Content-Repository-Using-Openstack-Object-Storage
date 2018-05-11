@@ -1,0 +1,53 @@
+{% extends 'videos/base.html'%}
+{% block active %}
+<li class=""><a href="{% url 'videos:studentsview' %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;Your Uploads</a></li>
+<li class=""><a href="{% url 'videos:facrated' %}"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>&nbsp;Rated</a></li>
+
+<style>
+#myProgress {
+    width: 100%;
+    background-color: grey;
+}
+#myBar {
+    width: 1%;
+    height: 30px;
+    background-color: green;
+}
+</style>
+{% endblock %}
+
+{%block add%}
+<li class="active"><a href="{% url 'videos:add' %}"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Add Video</a></li>
+<li class="dropdown">
+  <a class="dropdown-toggle" data-toggle="dropdown" href="#"><b>{{username}}</b><span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class=""><a href="{% url 'videos:logout' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a></li>
+    </ul>
+</li>
+{%endblock%}
+
+{% block body %}
+  <form method="post" style="margin-top: 5%;" enctype="multipart/form-data">
+    <div class="container" style="padding-top: 0px;">
+      <h1>Upload Video</h1>
+      <hr>
+    {% csrf_token %}
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
+    <div class="clearfix">
+     <button onclick="uploadFile()" type="submit" class="signupbtn">upload</button>
+   </div>
+  </div>
+  </form>
+
+{% endblock %}

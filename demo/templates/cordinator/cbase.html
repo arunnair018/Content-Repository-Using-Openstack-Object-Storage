@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>VidServe</title>
+  <!-- Loads path to static files-->
+  {% load staticfiles %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Satisfy" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'registration.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <link rel="icon" href="{% static 'favicon.ico' %}" />
+  <style>
+  .navbar-brand{
+    font-family: 'Satisfy', cursive;
+  }
+
+  #myInput {
+      margin-top: .5%;
+      width: 60%;
+      border: 1px solid #ddd;
+      font-size: 16px;
+      border-radius: 10px;
+  }
+  </style>
+</head>
+
+<body style="background-color: #eff3f4;">
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <!--Header-->
+      <div class="navbar-header">
+        <!-- Collapse button (for mobile menu) -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <!-- Logo -->
+        <a class="navbar-brand" href="/">VidServe</a>
+      </div>
+      <!--Items-->
+      <div class="collapse navbar-collapse" id="topNavBar">
+          <!-- User n Video -->
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class=""><a href="{% url 'videos:register' %}">Add User</a></li>
+                  <li class=""><a href="{% url 'videos:udel' %}">Delete User</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Subjects<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li class=""><a href="{% url 'videos:subr' %}">Add Subject</a></li>
+                  <li class=""><a href="{% url 'videos:tdel' %}">Delete Subject</a></li>
+                </ul>
+            </li>
+          </ul>
+          <!-- Add n Logout -->
+          <ul class="nav navbar-nav navbar-right">
+            {%block add%}{%endblock%}
+            <li class=""><a href="{% url 'videos:logout' %}"><span class="glyphicon glyphicon-off" aria-hidden="true"></span>&nbsp;Logout</a></li>
+          </ul>
+
+      </div>
+
+    </div>
+  </nav>
+{% block body %}
+{% endblock %}
+</body>
+</html>

@@ -1,8 +1,8 @@
 # Content Repository using Openstack Object Storage
 
 To build a media storage solution for storing content on On-Premise Private Cloud.  
-⋅⋅* Installed and configured OpenStack cloud.
-..* Build an interface to access records stored on the cloud using the Django framework
+* Installed and configured OpenStack cloud.  
+* Build an interface to access records stored on the cloud using the Django framework
 
 ## Technologies Used
 
